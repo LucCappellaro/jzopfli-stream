@@ -1,4 +1,4 @@
-package lu.luz.compression_utils;
+package lu.luz.jzopfli_stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

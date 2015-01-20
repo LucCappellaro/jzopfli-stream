@@ -1,4 +1,4 @@
-package lu.luz.compression_utils;
+package lu.luz.jzopfli_stream;
 
 import static org.junit.Assert.assertArrayEquals;
 
@@ -7,6 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
+
+import lu.luz.jzopfli_stream.ZopfliTools;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package lu.luz.compression_utils;
+package lu.luz.jzopfli_stream;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import lu.luz.jzopfli_stream.ZopfliOutputStream;
 
 public class TestUtils {
 
