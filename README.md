@@ -2,7 +2,7 @@ jzopfli-stream
 =======
 This project implements a ZipOutputStream using the [Zopfli](https://code.google.com/p/zopfli/) algorithm.
 
-## Advatanges:
+## Advantages:
 <ol>
 <li>Better compression</li>
 <li>Easy to use (drop-in replacement)</li>
