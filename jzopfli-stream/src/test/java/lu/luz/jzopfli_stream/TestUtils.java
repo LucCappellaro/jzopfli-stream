@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import lu.luz.jzopfli_stream.ZopfliOutputStream;
-
 public class TestUtils {
 
 	private TestUtils(){}
@@ -34,8 +32,12 @@ public class TestUtils {
 		ZopfliOutputStream zos;
 		if(blocksize==null && windowSize==null)
 			zos=new ZopfliOutputStream(bos);
-		else
-			zos=new ZopfliOutputStream(bos, blocksize, windowSize);
+		else{
+			ZopfliDeflaterOptions opts=new ZopfliDeflaterOptions();
+			opts.setMasterBlockSize(blocksize);
+			opts.setWindowSize(windowSize);
+			zos=new ZopfliOutputStream(bos, opts);
+		}
 		zos.putNextEntry(new ZipEntry("file"));
 		zos.write(in);
 		zos.close();

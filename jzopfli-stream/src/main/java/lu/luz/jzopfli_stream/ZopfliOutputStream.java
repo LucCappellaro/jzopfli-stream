@@ -9,9 +9,9 @@ package lu.luz.jzopfli_stream;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,20 +24,14 @@ package lu.luz.jzopfli_stream;
 import java.io.OutputStream;
 import java.util.zip.ZipOutputStream;
 
-import lu.luz.jzopfli.UtilH;
-
 public final class ZopfliOutputStream extends ZipOutputStream{
 
 	public ZopfliOutputStream(OutputStream out) {
-		this(out, UtilH.ZOPFLI_MASTER_BLOCK_SIZE, UtilH.ZOPFLI_WINDOW_SIZE);
+		this(out, new ZopfliDeflaterOptions());
 	}
 
-	public ZopfliOutputStream(OutputStream out, int blocksize) {
-		this(out, blocksize, UtilH.ZOPFLI_WINDOW_SIZE);
-	}
-
-	ZopfliOutputStream(OutputStream out, int blocksize, int windowSize) {
+	public ZopfliOutputStream(OutputStream out, ZopfliDeflaterOptions options) {
 		super(out);
-		this.def=new ZopfliDeflater(blocksize, windowSize);
+		this.def=new ZopfliDeflater(options);
 	}
 }

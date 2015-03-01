@@ -4,7 +4,7 @@
 
 	<groupId>com.github.luccappellaro</groupId>
 	<artifactId>jzopfli-stream</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<packaging>jar</packaging>
 
 	<name>JZopfli Stream</name>
@@ -120,7 +120,7 @@
 		<dependency>
 			<groupId>com.github.luccappellaro</groupId>
 			<artifactId>jzopfli</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.4</version>
 		</dependency>
 		
 		<dependency>

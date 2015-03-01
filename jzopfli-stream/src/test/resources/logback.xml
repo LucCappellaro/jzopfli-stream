@@ -26,7 +26,7 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<File>log.log</File>
+		<File>target/log.log</File>
 		<append>false</append>
 		<encoder>
 			<pattern>${PATTERN}</pattern>

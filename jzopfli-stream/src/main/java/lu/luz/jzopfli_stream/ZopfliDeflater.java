@@ -9,9 +9,9 @@ package lu.luz.jzopfli_stream;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,19 +24,17 @@ package lu.luz.jzopfli_stream;
 import java.util.zip.Deflater;
 
 import lu.luz.jzopfli.Deflate;
-import lu.luz.jzopfli.UtilH;
 import lu.luz.jzopfli.ZopfliH.ZopfliOptions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 final class ZopfliDeflater extends Deflater {
-	public static final int ZOPFLI_UNCOMPRESSED=0, ZOPFLI_FIXED_TREE=1,  ZOPFLI_DYNAMIC_TREE=2;
 	private static final Logger LOG = LoggerFactory.getLogger(ZopfliDeflater.class);
 
-	private ZopfliOptions options=new ZopfliOptions();
-	private int masterBlockSize;
-	private int strategy = ZOPFLI_DYNAMIC_TREE;
+	private final ZopfliOptions options;
+	private final int masterBlockSize;
+	private int strategy;
 	private boolean finish, finalBlock;
 	private final InBuffer inBlock;
 	private byte[][] outBlock;
@@ -47,12 +45,20 @@ final class ZopfliDeflater extends Deflater {
 	private long bytesWritten;
 
 	public ZopfliDeflater() {
-		this(UtilH.ZOPFLI_MASTER_BLOCK_SIZE, UtilH.ZOPFLI_WINDOW_SIZE);
+		this(new ZopfliDeflaterOptions());
 	}
 
-	public ZopfliDeflater(int masterBlockSize, int windowSize) {
-		this.masterBlockSize = masterBlockSize;
-		inBlock=new InBuffer(windowSize, masterBlockSize);
+	public ZopfliDeflater(ZopfliDeflaterOptions options) {
+		this.options=new ZopfliOptions();
+		this.options.verbose = options.isVerbose();
+		this.options.verbose_more = options.isVerboseMore();
+		this.options.numiterations = options.getNumIterations();
+		this.options.blocksplitting = options.isBlockSplitting();
+		this.options.blocksplittinglast = options.isBlockSplittingLast();
+		this.options.blocksplittingmax = options.getBlockSplittingMax();
+		this.strategy=options.getStrategy().getValue();
+		this.masterBlockSize = options.getMasterBlockSize();
+		inBlock=new InBuffer(options.getWindowSize(), masterBlockSize);
 	}
 
 	@Override
